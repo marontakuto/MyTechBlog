@@ -27,6 +27,7 @@ main {
     list-style-type: disc; /* 丸い箇条書きマーク */
     margin: 20px auto;
     padding-left: 20px; /* 左側にスペース */
+    margin-left: 35px;
     max-width: 600px; /* リストの幅を制限 */
     padding: 20px; /* 内側に余白をつける */
     color: #fff;
