@@ -1,12 +1,9 @@
-/* メインセクション */
-main {
-    padding: 20px;
-    text-align: center;
-}
+/* home.css */
 
 .intro {
     background-color: rgba(65, 65, 65, 0.95);
-    margin-top: 20px;
+    margin-top: 135px;
+    margin-bottom: 70px;
     padding: 20px;
     border-radius: 10px;
     display: inline-block;
@@ -50,9 +47,9 @@ main {
 }
 
 .creater a {
-    color: #050090;
+    color: #2520c8;
 }
 
 .creater a:hover {
-    color: #0600b9;
+    color: #302adb;
 }

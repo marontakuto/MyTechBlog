@@ -1,58 +1,51 @@
-/* メインセクション */
-main {
-    padding: 20px;
-    text-align: center;
-}
+/* articles.css */
 
-.intro {
-    background-color: rgba(65, 65, 65, 0.95);
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
+.articles-list {
+    padding-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    width: 800px;
     max-width: 90%;
+    margin: 0 auto;
+    margin-top: 135px;
+    margin-bottom: 70px;
+    background-color: rgba(63, 63, 63, 0.9);
+    border-radius: 10px;
 }
 
-.intro h2 {
-    margin-bottom: 10px;
+.articles-list h2 {
     font-size: 30px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.articles-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.articles-list li {
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+    margin-bottom: 10px;
+}
+
+.articles-list li a {
+    text-decoration: none;
+    color: #0073e6;
+    font-size: 18px;
+}
+
+.articles-list li a:hover {
     text-decoration: underline;
 }
 
-/* サイト目的リストのデザイン */
-.purpose-list {
-    list-style-type: disc; /* 丸い箇条書きマーク */
-    margin-left: 25px;
-    margin-bottom: 45px;
-    padding: 20px;
-    max-width: 600px;
-    color: #fff;
-    text-align: left; /* 左揃えに設定 */
-}
-
-.purpose-list li {
-    margin-bottom: 10px;
-    font-size: 25px;
-}
-
-/* ブログ作者説明のデザイン */
-.creater {
-    list-style: none;
-    padding: 20px;
-    max-width: 600px;
-    color: #fff;
-    text-align: left;
-}
-
-.creater p {
-    margin-bottom: 15px;
-    font-size: 25px;
-}
-
-.creater a {
-    color: #050090;
-}
-
-.creater a:hover {
-    color: #0600b9;
+.articles-list .date {
+    font-size: 14px;
+    color: #ffffff;
 }
