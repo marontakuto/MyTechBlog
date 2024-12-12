@@ -1,0 +1,334 @@
+次の内容で自分の技術記事を閲覧できるサイトを作っています。ホームページと記事一覧のページの大まかなデザインはできましたが、記事の表示をどのようにするか困っています。保存されている記事を動的に一覧に表示させて、選択された内容をページのフォーマットに当てはめて出力するようにしたいのですが、どのように設計すると良いですか。
+
+ファイル構成
+img/python.jpg
+styles/
+    articles.css
+    common.css
+    home.css
+articles.html
+home.html
+
+/* articles.css */
+
+.articles-list {
+    padding-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    width: 800px;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 135px;
+    margin-bottom: 70px;
+    background-color: rgba(63, 63, 63, 0.9);
+    border-radius: 10px;
+}
+
+.articles-list h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.articles-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.articles-list li {
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+    margin-bottom: 10px;
+}
+
+.articles-list li a {
+    text-decoration: none;
+    color: #0073e6;
+    font-size: 18px;
+}
+
+.articles-list li a:hover {
+    text-decoration: underline;
+}
+
+.articles-list .date {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* common.css */
+
+/* 全体のリセット */
+body, h1, h2, p, ul, li, a, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景画像の設定 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-image: url('../img/python.jpg');
+    /* background-color: rgb(0, 0, 0); */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ヘッダー */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* タイトルとボタンを左右に配置 */
+    align-items: center; /* 垂直方向の中央揃え */
+    z-index: 1000;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* タイトルとボタンを左右に配置 */
+    width: 100%; /* 幅を100%に設定 */
+}
+
+header h1 {
+    font-size: 28px;
+    margin: 0; /* 不要なマージンを削除 */
+    white-space: nowrap; /* タイトルが折り返さないようにする */
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ナビゲーションバー */
+nav {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(150, 12, 12, 0.9);
+    z-index: 999;
+}
+
+.nav-bar {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.nav-bar li {
+    margin: 0 30px;
+    font-size: 18px;
+}
+
+.nav-bar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+
+/* メインセクション */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* フッター */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #6a0000;
+    text-align: center;
+    padding: 10px 0;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+/* home.css */
+
+.intro {
+    background-color: rgba(65, 65, 65, 0.95);
+    margin-top: 135px;
+    margin-bottom: 70px;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    max-width: 90%;
+}
+
+.intro h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+/* サイト目的リストのデザイン */
+.purpose-list {
+    list-style-type: disc; /* 丸い箇条書きマーク */
+    margin-left: 25px;
+    margin-bottom: 45px;
+    padding: 20px;
+    max-width: 600px;
+    color: #fff;
+    text-align: left; /* 左揃えに設定 */
+}
+
+.purpose-list li {
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+/* ブログ作者説明のデザイン */
+.creater {
+    list-style: none;
+    padding: 20px;
+    max-width: 600px;
+    color: #fff;
+    text-align: left;
+}
+
+.creater p {
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.creater a {
+    color: #2520c8;
+}
+
+.creater a:hover {
+    color: #302adb;
+} 
+
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTechBlog [HOME]</title>
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1 ><a href="home.html">MyTechBlog [HOME]</a></h1>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="nav-bar">
+      <li><a href="home.html">HOME</a></li>
+      <li><a href="articles.html">ARTICLES</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="intro">
+
+      <h2>サイトの目的</h2>
+      <ul class="purpose-list">
+        <li>プロジェクト, エラー対処, 環境構築の記録</li>
+        <li>記録を通じた情報技術の定着</li>
+        <li>サイト運用によるWeb開発技術の習得</li>
+      </ul>
+
+      <h2>作者のプロフィール</h2>
+      <div class="creater">
+        <p><strong>職業: </strong>高専 専攻科 電子情報専攻</p>
+        <p><strong>専門分野: </strong>人工知能, 機械学習</p>
+        <p>
+          <strong>研究内容: </strong>
+          AIロボットにおけるニューラルネットワークのハイパーパラメータ・報酬関数の最適化
+        </p>
+        <p><strong>プログラミング言語: </strong>Python</p>
+        <p><strong>ツール: </strong>ROS</p>
+        <p>
+          <strong>GitHub: </strong>
+          <a href="https://github.com/marontakuto" target="_blank">
+            https://github.com/marontakuto
+          </a>
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 MyTechBlog</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<!-- articles.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTechBlog [ARTICLES]</title>
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/articles.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1><a href="home.html">MyTechBlog [ARTICLES]</a></h1>
+    </div>
+  </header>
+
+  <nav>
+    <ul class="nav-bar">
+      <li><a href="home.html">HOME</a></li>
+      <li><a href="articles.html">ARTICLES</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="articles-list">
+      <h2>記事一覧</h2>
+      <ul>
+        <li><a href="#">記事タイトル 1</a> <span class="date">2024-12-10</span></li>
+        <li><a href="#">記事タイトル 2</a> <span class="date">2024-12-08</span></li>
+        <li><a href="#">記事タイトル 3</a> <span class="date">2024-12-05</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 MyTechBlog</p>
+    </div>
+  </footer>
+
+</body>
+</html>
